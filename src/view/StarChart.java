@@ -1,6 +1,6 @@
 package view;
 
-import cs_1c.SparseMat;
+import data.SparseMat;
 import data.*;
 import javafx.application.Application;
 import javafx.application.Platform;

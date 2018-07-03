@@ -15,6 +15,7 @@ public class Foothill
       double xConversion, yConversion, zConversion, tempX, tempY, tempZ,
               rangeX, rangeY, rangeZ;
       double xMin = 0, yMin = 0, xMax = 0, yMax = 0, zMin = 0, zMax = 0;
+      boolean TEST = false;
 
       // read the data from files
       StarNearEarthReader starInput
@@ -27,8 +28,8 @@ public class Foothill
          return;
       }
 
-      System.out.println(starInput.getFileName());
-      System.out.println(starInput.getNumStars());
+      if(TEST)System.out.println(starInput.getFileName());
+      if(TEST)System.out.println(starInput.getNumStars());
 
       // create an array of objects for our own use:
       arraySize = starInput.getNumStars();
@@ -39,7 +40,7 @@ public class Foothill
       // display cartesion coords
       for ( k = 0; k < arraySize; k++ )
       {
-         System.out.println(starArray[k].getNameCommon() + " "
+         if(TEST)System.out.println(starArray[k].getNameCommon() + " "
           + starArray[k].coordToString() + " " + starArray[k].getRank());
          tempX = starArray[k].getX();
          tempY = starArray[k].getY();
@@ -51,15 +52,16 @@ public class Foothill
          zMin = ( tempZ < zMin ) ? tempZ : zMin;
          zMax = ( tempZ > zMax ) ? tempZ : zMax;
       }
-      System.out.println(String.format("xMin = %.2f, yMin = %.2f, " +
+      if(TEST)System.out.println(String.format("xMin = %.2f, yMin = %.2f, " +
                       "xMax = %.2f, yMax = %.2f, zMax = %.2f, zMin = %.2f",
               xMin, yMin, xMax, yMax, zMax, zMin));
       rangeX = xMax - xMin;
       rangeY = yMax - yMin;
       rangeZ = zMax - zMin;
-      System.out.println(String.format("rangeX = %.2f, rangeY = %.2f, " +
+      if(TEST)System.out.println(String.format("rangeX = %.2f, rangeY = %.2f, " +
                       "rangeZ = %.2f", rangeX, rangeY, rangeZ));
 
+      System.out.println("Plane 1: (y,x) Plane 2: (y,z) Plane 3: (z,x)");
 
       for(int i: planeChoice)
       {
@@ -70,8 +72,9 @@ public class Foothill
          else
             zConversion = (NUM_COLS - 1) / rangeZ; // (y,z)
 
-         System.out.println(String.format("scaleY = %.2f, scaleX = %.2f, " +
+         if(TEST)System.out.println(String.format("scaleY = %.2f, scaleX = %.2f, " +
                  "scaleZ = %.2f", yConversion, xConversion, zConversion));
+         System.out.println("Plane " + i);
 
          SparseMat<Character> starMap =
                  new SparseMat<>(NUM_ROWS, NUM_COLS, ' ');
@@ -104,7 +107,7 @@ public class Foothill
             }
 
             if (!s)
-               System.out.println("set failed");
+               if(TEST)System.out.println("set failed");
          }
          // sun set up
          int sunX, sunY, sunZ;
@@ -120,7 +123,7 @@ public class Foothill
             s = starMap.set(sunZ, sunX, 'S');
 
          if (!s)
-            System.out.println("set failed");
+            if(TEST)System.out.println("set failed");
 
          starMap.showAll();
       }

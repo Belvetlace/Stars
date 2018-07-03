@@ -1,6 +1,5 @@
 package data;
 
-import cs_1c.SparseMat;
 import cs_1c.StarNearEarthReader;
 
 public class DataModel

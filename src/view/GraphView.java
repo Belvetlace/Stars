@@ -1,6 +1,6 @@
 package view;
 
-import cs_1c.SparseMat;
+import data.SparseMat;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 

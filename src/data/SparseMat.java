@@ -1,12 +1,14 @@
-package cs_1c;
+package data;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 public class SparseMat<E> implements Cloneable
 {
    protected int numRows, numCols;
    protected E defaultVal;
-   protected FHarrayList<FHlinkedList<MatNode>> rows;
+   protected ArrayList<LinkedList<MatNode>> rows;
    private static String lineSeparator = System.getProperty("line.separator");
 
    public SparseMat(int numRows, int numCols, E defaultVal)
@@ -23,10 +25,10 @@ public class SparseMat<E> implements Cloneable
 
    private void allocateEmptyMatrix()
    {
-      rows = new FHarrayList<FHlinkedList<MatNode>>(numRows);
+      rows = new ArrayList<LinkedList<MatNode>>(numRows);
       for (int i = 0; i < numRows; i++)
       {
-         rows.add(new FHlinkedList<MatNode>());
+         rows.add(new LinkedList<MatNode>());
       }
    }
 
@@ -37,7 +39,7 @@ public class SparseMat<E> implements Cloneable
          throw new IndexOutOfBoundsException();
       }
 
-      FHlinkedList<MatNode> matNodes = rows.get(r);
+      LinkedList<MatNode> matNodes = rows.get(r);
       if (!matNodes.isEmpty())
       {
          Iterator<MatNode> iter = matNodes.iterator();
@@ -61,7 +63,7 @@ public class SparseMat<E> implements Cloneable
       {
          return false;
       }
-      FHlinkedList<MatNode> matNodes = rows.get(r);
+      LinkedList<MatNode> matNodes = rows.get(r);
       if (matNodes.isEmpty())
       {
          if (!x.equals(defaultVal))
@@ -200,7 +202,7 @@ public class SparseMat<E> implements Cloneable
       System.out.println(rStr);
    }
 
-   public FHarrayList<FHlinkedList<MatNode>> getRows()
+   public ArrayList<LinkedList<MatNode>> getRows()
    {
       return rows;
    }
@@ -220,10 +222,10 @@ public class SparseMat<E> implements Cloneable
    protected Object clone() throws CloneNotSupportedException
    {
       SparseMat<MatNode> newObject = (SparseMat<MatNode>) super.clone();
-      newObject.rows = (FHarrayList<FHlinkedList<MatNode>>) rows.clone();
+      newObject.rows = (ArrayList<LinkedList<MatNode>>) rows.clone();
       for (int i = 0; i < numRows; i++)
       {
-         newObject.rows.set(i, (FHlinkedList<MatNode>) rows.get(i).clone());
+         newObject.rows.set(i, (LinkedList<MatNode>) rows.get(i).clone());
       }
       return newObject;
    }

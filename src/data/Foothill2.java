@@ -1,7 +1,6 @@
 package data;
 
 import cs_1c.*;
-import data.SNE_Analyzer;
 
 // Main file for StarNearEarth Analyzer Project
 
